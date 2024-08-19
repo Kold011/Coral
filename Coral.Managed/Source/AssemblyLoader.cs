@@ -1,4 +1,5 @@
-﻿using Coral.Managed.Interop;
+﻿//#define UNLOAD_OBJECT_LOGGING
+using Coral.Managed.Interop;
 
 using System;
 using System.Collections.Generic;
@@ -143,7 +144,9 @@ public static class AssemblyLoader
 					continue;
 				}
 
+#if UNLOAD_OBJECT_LOGGING
 				LogMessage($"Found unfreed object '{handle.Target}' from assembly '{assemblyName}'. Deallocating.", MessageLevel.Warning);
+#endif
 				handle.Free();
 			}
 
